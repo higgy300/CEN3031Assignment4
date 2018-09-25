@@ -55,7 +55,7 @@ exports.update = function(req, res) {
   listing.save(function(err) {
     if (err) {
       console.log(err);
-      res.status(404).send(err);
+      res.status(400).send(err);
     } else {
       res.json(listing);
     }
@@ -70,7 +70,7 @@ exports.delete = function(req, res) {
   listing.remove(function(err) {
     if (err) {
       console.log(err);
-      res.status(404).send(err);
+      res.status(400).send(err);
     } else {
       res.end();
     }
@@ -82,7 +82,7 @@ exports.list = function(req, res) {
   /* Your code here */
   Listing.find().sort('code').exec(function(err, data) {
     if (err) {
-      res.status(404).send(err);
+      res.status(400).send(err);
     } else {
       res.json(data);
     }
@@ -99,7 +99,7 @@ exports.list = function(req, res) {
 exports.listingByID = function(req, res, next, id) {
   Listing.findById(id).exec(function(err, listing) {
     if(err) {
-      res.status(404).send(err);
+      res.status(400).send(err);
     } else {
       req.listing = listing;
       next();
