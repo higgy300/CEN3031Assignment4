@@ -1,4 +1,7 @@
 ```diff
+- # Bug 25SEP2018 1:28PM: Heroku fails to fetch from database. GUI for web app works.
+```
+```diff
 - # Bug fix: There was a missing comma on line 5 of client/js/factories/listingFactory.js
 ```
 
