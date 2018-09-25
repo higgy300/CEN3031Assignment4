@@ -22,6 +22,7 @@ angular.module('listings').controller('ListingsController', ['$scope', 'Listings
 
       $scope.listings.push($scope.newListing);
       $scope.newListing = {};
+      
       Listings.create(newListEntry).then(function(response) {
           $scope.newListing.name = '';
           $scope.newListing.code = '';
@@ -37,13 +38,11 @@ angular.module('listings').controller('ListingsController', ['$scope', 'Listings
  		navigate back to 'listing.list'. Otherwise, display the error.
         */
         var entry = $scope.listings[index];
-        var entryCode = entry._id;
+        var entryID = entry._id;
 
-        Listings.delete(entryCode).then(function(response) {
-          console.log('Unable to delete');
-        }, function (error) {
-          console.log('error');
-        });
+        Listings.delete(entryID).then(function(response) {
+          console.log('unable to delete')},
+           function(error) {console.log('error')});
       $scope.listings.splice(index, 1);
     };
 
