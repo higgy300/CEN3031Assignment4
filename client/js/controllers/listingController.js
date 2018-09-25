@@ -14,8 +14,21 @@ angular.module('listings').controller('ListingsController', ['$scope', 'Listings
   	  *Save the article using the Listings factory. If the object is successfully
   	  saved redirect back to the list page. Otherwise, display the error
   	 */
+     var newListEntry = {
+       name: $scope.newListing.name,
+       code: $scope.newListing.code,
+       address: $scope.newListing.address
+     };
+
       $scope.listings.push($scope.newListing);
       $scope.newListing = {};
+      Listings.create(newListEntry).then(function(response) {
+          $scope.newListing.name = '';
+          $scope.newListing.code = '';
+          $scope.newListing.address = '';
+      }, function(error) {
+        $scope.error = 'Listing not saved:' + error;
+      });
     };
 
     $scope.deleteListing = function(index) {
@@ -23,6 +36,14 @@ angular.module('listings').controller('ListingsController', ['$scope', 'Listings
          Delete the article using the Listings factory. If the removal is successful,
  		navigate back to 'listing.list'. Otherwise, display the error.
         */
+        var entry = $scope.listings[index];
+        var entryCode = entry._id;
+
+        Listings.delete(entryCode).then(function(response) {
+          console.log('Unable to delete');
+        }, function (error) {
+          console.log('error');
+        });
       $scope.listings.splice(index, 1);
     };
 
